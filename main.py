@@ -5,7 +5,6 @@ from utils.data import *
 from utils.util import *
 
 base_score = [0, 0, 0, 0, 70001, 0, 100100, 100100, 0, 30001]
-pmain = [1, 1, 0, 0.8/3, 0.8/3, 0.8/3, 0.1, 0.1, 0.1, 0.1, 0.05*2]
 
 print("词条编号：")
 for i in range(len(attr)):
@@ -114,13 +113,11 @@ def get_score():
 N = 200
 res = {0:1.0}
 
-base_dict = [{510303:1}, {640502:1}, {400400:1}, {420304:1}, {500304:1}]
-main_list = [0, 1, 4, 6, 10]
 
 for i in range(5):
     init(main_list[i])
     s = get_score()
-    s = dict_pow(s, round(N*0.1*1.065*pmain[main_list[i]]))
+    s = dict_pow(s, round(N*0.1*1.065*main_weight[i][main_list[i]]))
     s = dict_mul(s, base_dict[i])
     # print([(i[0], round(i[1], 6)) for i in sorted(s.items(), key=lambda x: x[0])])
     res = dict_add(res, s)
